@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>See Stuff - All</title>
+    <%= stylesheet_link_tag "items.scss" %>
+  </head>
+  
+  <body>
+    <h1>See Stuff - All</h1>
+    <p>Click a link to see individual item details.</p>
+      <ul>
+      <% for item in @items %>
+        <li>
+          <a href="/items/<%= item.id %>">
+           <img src="<%= item.img_sml_loc %>"/><br>
+           <%= item.title %>
+          </a>
+        </li>
+        <br>
+      <% end %>
+      </ul>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+// Place all the styles related to the items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body { 
+  background-color: #9CBA7F; // mint candy 
+  font-family: "Trebuchet MS", Arial, san-serif; 
+  font-size: 16px; 
+  margin: 0; 
+  padding: 0; 
+  text-align: center; 
+}
+
+ul {
+  list-style-type: none;
+}
+
+a:link { 
+  color: #0000EE; // blue
+}
+
+a:visited {
+ color: #551A8B; // purple
+}
+
+a:hover {
+  color: #FF0000; // red
+}
