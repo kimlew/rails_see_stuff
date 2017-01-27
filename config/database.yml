@@ -22,4 +22,13 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: db/production.mysql2
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: rails_see_stuff_production
+  pool: 5
+  username: kim
+  password: miloVB17&!
+  host: localhost
+
