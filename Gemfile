@@ -45,4 +45,9 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  # Allows full integration with Heroku, without it having to inject
+  # 'plugins' into your application
+  gem 'rails_12factor'
+end
 
