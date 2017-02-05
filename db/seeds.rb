@@ -11,7 +11,7 @@ Product.create!(title: 'Funny Face',
   width: 7.50,
   height: 4.50, 
   lister_id: 1,
-  email: lolarabbit@gmail.com,
+  email: 'lolarabbit@gmail.com',
   img_loc: '/assets/funny_face.png', 
   img_sml_loc: '/assets/funny_face_sml.png')
 
@@ -20,6 +20,6 @@ Product.create!(title: 'Funky Hair',
   width: 3.75,
   height: 3.50, 
   lister_id: 2,
-  email: davebear@gmail.com,
+  email: 'davebear@gmail.com',
   img_loc: '/assets/funky_hair.png', 
   img_sml_loc: '/assets/funky_hair_sml.png')
