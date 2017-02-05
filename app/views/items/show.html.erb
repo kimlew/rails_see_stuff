@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>See Stuff</title>
-    <%= stylesheet_link_tag "items.scss" %>
-  </head>
-  
   <h1>See Stuff - <%= @item.title %></h1>
-  <body>
     <p><b>Title: </b>        <%= @item.title %></p>
     <p><b>Description: </b>  <%= @item.description %></p>
     <p><b>Width: </b>        <%= @item.width %> inches</p>
@@ -17,5 +9,3 @@
     
     <%= link_to("Back to See Stuff - All", {:action => 'index'}, 
       :class => 'back-link') %>
-  </body>
-</html>
