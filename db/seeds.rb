@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Product.create!(title: 'Funny Face',
+Item.create!(title: 'Funny Face',
   description: 'ink on board',
   width: 7.50,
   height: 4.50, 
@@ -15,7 +15,7 @@ Product.create!(title: 'Funny Face',
   img_loc: '/assets/funny_face.png', 
   img_sml_loc: '/assets/funny_face_sml.png')
 
-Product.create!(title: 'Funky Hair',
+Item.create!(title: 'Funky Hair',
   description: 'ink on board',
   width: 3.75,
   height: 3.50, 
