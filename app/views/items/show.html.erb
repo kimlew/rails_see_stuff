@@ -13,7 +13,7 @@
     <p><b>Height: </b>       <%= @item.height %> inches</p>
     <p><b>Lister ID: </b>    <%= @item.lister_id %></p>
     <p><b>Email: </b>        <%= @item.email %></p>
-    <p><img src="<%= @item.img_loc %>"/></p>
+    <p><%= image_tag(@item.img_loc) %></p>
     
     <%= link_to("Back to See Stuff - All", {:action => 'index'}, 
       :class => 'back-link') %>
