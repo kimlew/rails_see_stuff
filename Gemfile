@@ -49,8 +49,11 @@ group :development do
   gem 'capistrano-passenger'
 end
 
-#group :production do
-#  gem 'mysql2'
-#end
+group :production do
+  # Include this gem so images display
+  gem 'rails_12factor'
+
+  #gem 'mysql2'
+end
 
 
