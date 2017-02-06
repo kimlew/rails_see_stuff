@@ -12,7 +12,7 @@
       <% for item in @items %>
         <li>
           <a href="/items/<%= item.id %>">
-           <img src="<%= item.img_sml_loc %>"/><br>
+           <%= image_tag(item.img_sml_loc) %><br>
            <%= item.title %>
           </a>
         </li>
