@@ -1,19 +1,11 @@
-
-
-  <head>
-    <title>See Stuff</title>
-  </head>
+<h1>See Stuff - <%= @item.title %></h1>
+  <p><b>Title: </b>        <%= @item.title %></p>
+  <p><b>Description: </b>  <%= @item.description %></p>
+  <p><b>Width: </b>        <%= @item.width %> inches</p>
+  <p><b>Height: </b>       <%= @item.height %> inches</p>
+  <p><b>Lister ID: </b>    <%= @item.lister_id %></p>
+  <p><b>Email: </b>        <%= @item.email %></p>
+  <p><%= image_tag(@item.img_loc) %></p>
   
-  <h1>See Stuff - <%= @item.title %></h1>
-  <body>
-    <p><b>Title: </b>        <%= @item.title %></p>
-    <p><b>Description: </b>  <%= @item.description %></p>
-    <p><b>Width: </b>        <%= @item.width %> inches</p>
-    <p><b>Height: </b>       <%= @item.height %> inches</p>
-    <p><b>Lister ID: </b>    <%= @item.lister_id %></p>
-    <p><b>Email: </b>        <%= @item.email %></p>
-    <p><%= image_tag(@item.img_loc) %></p>
-    
-    <%= link_to("Back to See Stuff - All", {:action => 'index'}, 
-      :class => 'back-link') %>
-  </body>
+  <%= link_to("Back to See Stuff - All", {:action => 'index'}, 
+    :class => 'back-link') %>
