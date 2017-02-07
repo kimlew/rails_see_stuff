@@ -1,21 +1,14 @@
+<h1>See Stuff - All</h1>
+<p>Click a link to see individual item details.</p>
+  <ul>
+  <% for item in @items %>
+    <li>
+      <a href="/items/<%= item.id %>">
+       <%= image_tag(item.img_sml_loc) %><br>
+       <%= item.title %>
+      </a>
+    </li>
+    <br>
+  <% end %>
+  </ul>
 
-
-  <head>
-    <title>See Stuff - All</title>
-  </head>
-  
-  <body>
-    <h1>See Stuff - All</h1>
-    <p>Click a link to see individual item details.</p>
-      <ul>
-      <% for item in @items %>
-        <li>
-          <a href="/items/<%= item.id %>">
-           <%= image_tag(item.img_sml_loc) %><br>
-           <%= item.title %>
-          </a>
-        </li>
-        <br>
-      <% end %>
-      </ul>
-  </body>
