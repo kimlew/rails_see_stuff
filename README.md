@@ -1,7 +1,7 @@
 # See Stuff README
 
 This Rails project:
-- view-only site - does NOT use Rails scaffolding, i.e., does NOT include the standard CRUD actions
+- is a view-only site - does NOT use Rails scaffolding, i.e., does NOT include the standard CRUD actions
 - has a deployed version at: https://rails-see-stuff.herokuapp.com/
 
 This project used these versions:
