@@ -78,7 +78,7 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.6)
-    loofah (2.3.0)
+    loofah (2.3.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -92,7 +92,7 @@ GEM
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     pg (0.21.0)
-    rack (1.6.11)
+    rack (1.6.12)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.11.1)
@@ -180,8 +180,10 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
+  loofah (>= 2.3.1)
   nokogiri (>= 1.10.4)
   pg (= 0.21.0)
+  rack (>= 1.6.12)
   rails (= 4.2.11.1)
   rails_12factor
   sass-rails (~> 5.0)
