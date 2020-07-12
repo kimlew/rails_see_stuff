@@ -1,21 +1,25 @@
 # See Stuff README
 
 This Rails project:
+
 - is a view-only site - does NOT use Rails scaffolding, i.e., does NOT include the standard CRUD actions
-- has a deployed version at: https://rails-see-stuff.herokuapp.com/
+- has a deployed version at: <https://rails-see-stuff.herokuapp.com/>
 
 This project used these versions:
+
 - Rails 4.2.6
 - ruby 2.3.0p0 (2015-12-25 revision 53290) [x86_64-darwin15]
 - SQLite whatever version is bundled with Rails
 
-1. Make sure you install these versions or newer ones to run the project properly.
-- https://www.ruby-lang.org/en/downloads/
-- https://www.ruby-lang.org/en/documentation/installation/
-- https://rubygems.org/gems/rails/versions/4.2.6
+- Make sure you install these versions or newer ones to run the project properly.
 
-2. Clone the files and folders in this repo.
-3. In the Terminal, start the rails server with the command: rails server
+- <https://www.ruby-lang.org/en/downloads/>
 
-4. In the browser, go to:
-http://localhost:3000/
+- <https://www.ruby-lang.org/en/documentation/installation/>
+- <https://rubygems.org/gems/rails/versions/4.2.6>
+
+- Clone the files and folders in this repo.
+
+- In the Terminal, start the rails server with the command: `rails server`
+
+- In the browser, go to: <http://localhost:3000/>
