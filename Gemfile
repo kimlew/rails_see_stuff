@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.6.1'
+ruby '~> 2.6.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.11.1'
+gem 'rails', '4.2.11.3'
 # Use sqlite3 as the database for Active Record'
 
 #gem 'sqlite3'
@@ -17,7 +17,7 @@ gem "loofah", ">= 2.3.1"
 
 # Tool for running Rack applications, uses the Rack::Builder DSL to configure
 # middleware & build up applications easily.
-gem "rack", ">= 1.6.12"
+# gem "rack", ">= 2.1.4"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
