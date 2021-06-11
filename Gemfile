@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-ruby '~> 2.6.1'
+ruby '~> 2.7.3'
 gem "json", ">= 2.3.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.4.6'
+gem 'rails', '5.2.6'
 
 # Use Postgres for database
 gem 'pg', '0.21.0'
