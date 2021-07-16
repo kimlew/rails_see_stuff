@@ -8,7 +8,7 @@ gem 'rails', '5.2.4.3'
 # Use Postgres for database
 gem 'pg', '0.21.0'
 
-gem "nokogiri", ">= 1.10.8"
+gem "nokogiri", ">= 1.11.4"
 # General library for manipulating & transforming HTML/XML documents &
 # fragments, built on top of Nokogiri.
 gem "loofah", ">= 2.3.1"
