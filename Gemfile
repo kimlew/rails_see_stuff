@@ -1,13 +1,17 @@
 source 'https://rubygems.org'
 
-ruby '~> 2.6.1'
+ruby '3.0.1'
 gem "json", ">= 2.3.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.4.6'
+gem 'rails', '7'
 
-# Use Postgres for database
-gem 'pg', '0.21.0'
+gem 'mysql2', '>= 0.5', '< 0.5.4'
+# Postgres database
+#gem 'pg', '0.21.0'
+
+# OLD Gemfile.lock actionpack (= 5.2.4.6)
+gem 'actionpack', '~> 7.0'
 
 gem "nokogiri", ">= 1.11.4"
 # General library for manipulating & transforming HTML/XML documents &
