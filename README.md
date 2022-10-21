@@ -7,22 +7,14 @@ This Rails project:
 
 Versions used:
 
-- Rails 5.2.4.3
-- Ruby 2.6.1 or higher
-- SQLite - whatever version is bundled with Rails
+- Rails 7
+- Ruby 3.0.1
+- SQLite3
 
 ## To run the app:
 
-1. Make sure you install the versions above to run the project properly. See:
+1. git clone git@github.com:kimlew/rails_see_stuff.git
 
-  - <https://www.ruby-lang.org/en/downloads/>
+2. Run: `bash init_and_run_app.sh`
 
-  - <https://www.ruby-lang.org/en/documentation/installation/>
-
-  - <https://rubygems.org/gems/rails/versions/5.2.4.3>
-
-2. Clone the files and folders in this repo.
-
-3. In the Terminal, start the rails server with the command: `rails server`
-
-4. Go to browser address: <http://localhost:3000/>
+3. Go to the browser address: <http://localhost:3000/>
