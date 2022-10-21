@@ -4,12 +4,12 @@ ruby '3.0.1'
 gem "json", ">= 2.3.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '7'
+gem 'rails', '~>7.0', '>= 7.0.4'
 
 # OLD Gemfile.lock actionpack (= 5.2.4.6)
 gem 'actionpack', '~> 7.0'
 
-gem 'puma', '5'
+gem 'puma', '~>5.6', '>= 5.6.5'
 gem 'sqlite3'
 
 gem "nokogiri", ">= 1.11.4"
