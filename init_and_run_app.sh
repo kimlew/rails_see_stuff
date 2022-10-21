@@ -1,10 +1,11 @@
 #! /usr/bin/env bash
 
 # This script installs packages needed in environment to run rails_see_stuff.
-# 
+#
+# mkdir rails_see_stuff
+# cd rails_see_stuff
+# Check if in rails_see_stuff & if not: cd rails_see_stuff
 
-mkdir rails_see_stuff
-cd rails_see_stuff
 sudo apt update && apt install -y \
   nodejs \
   nano \
@@ -13,6 +14,9 @@ sudo apt update && apt install -y \
 rbenv local 3.0.1
 gem install rails -v 7
 gem install bundler -v 2.3.22
+gem install puma
+gem install sqlite3
+gem install actionpack
 bundle install
 
 # First, copy locked Gemfile & Gemfile.lock & only installs missing gems.
@@ -27,5 +31,9 @@ cp Gemfile .
 cp Gemfile.lock .
 bundle check || bundle install
 
+rake db:create
+rake db:migrate
+rake db:seed
+
 rails server # -b", "0.0.0.0"]
-# View in browser at: http://localhost:48015/
+# View in browser at: http://localhost:3000 # 48015/
