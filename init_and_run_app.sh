@@ -13,12 +13,12 @@
 #   cd rails_see_stuff
 # end
 
-rbenv local 3.0.1
-gem install rails -v 7.0
+rbenv local 3.0.4
+# gem install rails -v 7.0
 gem install bundler -v 2.3.22
-gem install puma -v 5.6.4
-gem install sqlite3
-gem install actionpack -v 7.0.4
+# gem install puma -v 5.6.4
+# gem install sqlite3
+# gem install actionpack -v 7.0.4
 bundle install
 
 rake db:create
