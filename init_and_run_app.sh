@@ -13,7 +13,7 @@
 #   cd rails_see_stuff
 # end
 
-rbenv local 3.0.4
+rbenv local 3.1.2
 # gem install rails -v 7.0
 gem install bundler -v 2.3.22
 # gem install puma -v 5.6.4
@@ -23,6 +23,7 @@ bundle install
 
 rake db:create
 rake db:migrate
+# If already have seed data, don't run this again:
 rake db:seed
 
 rails server # -b", "0.0.0.0"]
