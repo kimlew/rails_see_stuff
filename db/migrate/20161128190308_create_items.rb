@@ -1,4 +1,7 @@
 class CreateItems < ActiveRecord::Migration[7.0]
+  validates_uniqueness_of :item_id # , scope: :user_id
+  # validates :item_id, uniqueness: { scope: :user_id }
+
   def change
     create_table :items do |t|
       t.string :title
