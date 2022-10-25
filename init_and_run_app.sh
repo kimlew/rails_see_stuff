@@ -22,7 +22,6 @@ check_if_rbenv_installed () {
   fi
 }
 
-cd rails_see_stuff
 check_current_directory
 check_if_rbenv_installed
 
