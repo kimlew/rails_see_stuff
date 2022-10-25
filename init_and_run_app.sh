@@ -1,30 +1,40 @@
 #! /usr/bin/env bash
 
-# This script run the See Stuff application.
-# Maybe: installs packages needed in environment to run rails_see_stuff.
+# NAME: init_and_run_app.sh
+#
+# BRIEF: This script installs packages needed in the environment to run the
+# See Stuff application and then runs it locally.
 
-# Check if rbenv is installed on system. If not: exit 1 & prompt user with msg:
-# if rbenv -v != mac$ rbenv --version rbenv 1.2.0; then
-#   echo 'You must install the package manager, rbenv version 1.2.0'
-# end
+check_current_directory () {
+  if [[ ! -d '../rails_see_stuff' ]]; then
+    echo 'You must be in the directory, rails_see_stuff, after cloning the code'
+    echo 'from https://github.com/kimlew/rails_see_stuff'
+    exit 1
+  fi
+}
 
-# Check if in rails_see_stuff & if not: cd rails_see_stuff
-# if current directory is not rails_see_stuff; then
-#   cd rails_see_stuff
-# end
+check_if_rbenv_installed () {
+  if ! command -v rbenv > /dev/null; then
+    echo 'You must install the package manager, rbenv. For example, install with:'
+    echo 'sudo apt install rbenv OR'
+    echo 'brew install rbenv ruby-build'
+    exit 1
+  fi
+}
 
+check_current_directory
+check_if_rbenv_installed
+
+# Use specific version of Ruby for project that works with Rails 7.
+# Install bundler which is required for rake commands for the database & items.
 rbenv local 3.1.2
-# gem install rails -v 7.0
 gem install bundler -v 2.3.22
-# gem install puma -v 5.6.4
-# gem install sqlite3
-# gem install actionpack -v 7.0.4
 bundle install
 
+rake db:drop
 rake db:create
 rake db:migrate
-# If already have seed data, don't run this again:
 rake db:seed
 
-rails server # -b", "0.0.0.0"]
-# View in browser at: http://localhost:3000 # 48015/
+rails server
+# View in browser at: http://localhost:3000
