@@ -4,6 +4,10 @@
 #
 # BRIEF: This script installs packages needed in the environment to run the
 # See Stuff application and then runs it locally.
+#
+# AUTHOR: Kim Lew
+
+set -e
 
 check_current_directory () {
   if [[ ! -d '../rails_see_stuff' ]]; then
@@ -28,6 +32,7 @@ check_if_rbenv_installed
 # Use specific version of Ruby for project that works with Rails 7.
 # Install bundler which is required for rake commands for the database & items.
 rbenv local 3.1.2
+eval $(rbenv init -)
 gem install bundler -v 2.3.22
 bundle install
 
