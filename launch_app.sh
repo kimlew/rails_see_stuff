@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-# NAME: init_and_run_app.sh
+# NAME: launch_app.sh
 #
 # BRIEF: This script installs packages needed in the environment to run the
 # See Stuff application and then runs it locally.
@@ -32,7 +32,7 @@ check_if_rbenv_installed
 # Use specific version of Ruby for project that works with Rails 7.
 # Install bundler which is required for rake commands for the database & items.
 rbenv local 3.1.2
-eval $(rbenv init -)
+eval "$(rbenv init -)"
 gem install bundler -v 2.3.22
 bundle install
 
