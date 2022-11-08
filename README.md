@@ -1,28 +1,20 @@
 # See Stuff README
 
-This Rails project:
+This migrates a previous Rails project that used Ruby 2.6.1, Rails 5.2.4.3 and SQLite, to these versions and their dependencies:
 
-- is a view-only site - does NOT use Rails scaffolding, i.e., does NOT include the standard CRUD actions
-- has a deployed version at: <https://rails-see-stuff.herokuapp.com/>
+- Rails 7.0
+- Ruby 3.1.2
+- SQLite3
+- Puma 5.6
 
-Versions used:
+The application is a view-only site. It does NOT use Rails scaffolding, i.e., does NOT include the standard CRUD actions.
 
-- Rails 5.2.4.3
-- Ruby 2.6.1 or higher
-- SQLite - whatever version is bundled with Rails
+## To run the application:
 
-## To run the app:
+1. Run: `git clone git@github.com:kimlew/rails_see_stuff.git`
 
-1. Make sure you install the versions above to run the project properly. See:
+2. Change to project directory with: `cd rails_see_stuff`
 
-  - <https://www.ruby-lang.org/en/downloads/>
+3. Run: `bash init_and_run_app.sh`
 
-  - <https://www.ruby-lang.org/en/documentation/installation/>
-
-  - <https://rubygems.org/gems/rails/versions/5.2.4.3>
-
-2. Clone the files and folders in this repo.
-
-3. In the Terminal, start the rails server with the command: `rails server`
-
-4. Go to browser address: <http://localhost:3000/>
+4. Go to the browser address: `<http://localhost:3000/>`

@@ -15,6 +15,18 @@
 /log/*
 !/log/.keep
 /tmp
+/db
+/vendor/cache/*
 
-# Ignore the .DS_Store file
-.DS_Store
+config.ru
+lib/
+bin/
+Rakefile
+
+# Ignore these files in development
+/storage
+/public
+/test
+junk
+*_results.txt
+.vscode/

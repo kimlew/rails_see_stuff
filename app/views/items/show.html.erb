@@ -1,11 +1,13 @@
 <h1>See Stuff - <%= @item.title %></h1>
+  <p></p>
+  <p><%= image_tag(@item.img_loc) %></p>
   <p><b>Title: </b>        <%= @item.title %></p>
   <p><b>Description: </b>  <%= @item.description %></p>
   <p><b>Width: </b>        <%= @item.width %> inches</p>
   <p><b>Height: </b>       <%= @item.height %> inches</p>
   <p><b>Lister ID: </b>    <%= @item.lister_id %></p>
   <p><b>Email: </b>        <%= @item.email %></p>
-  <p><%= image_tag(@item.img_loc) %></p>
-  
-  <%= link_to("Back to See Stuff - All", {:action => 'index'}, 
+  <p></p>
+  <%= link_to("Back to See Stuff - All", {:action => 'index'},
     :class => 'back-link') %>
+  <p></p>

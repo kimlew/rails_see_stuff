@@ -5,27 +5,31 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: postgresql
+  adapter: sqlite3
+  database: db/development.sqlite3
   encoding: unicode
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
-  database: rails-see-stuff_development 
-  #WAS: db/development.sqlite3
+  adapter: sqlite3
+  encoding: utf8
+  database: db/development.sqlite3 # rails-see-stuff_development
+  pool: 5
+  username: root
+  password:
+  socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: rails-see-stuff_test 
-  #WAS: db/test.sqlite3
+  database: db/test.sqlite3 # rails-see-stuff_test
 
 production:
   <<: *default
   # Replaced all previous settings with just 1 line that Heroku sets for the environment
-  # Note: Use ENVIRONMENT variables to prevent people from seeing username & password. 
+  # Note: Use ENVIRONMENT variables to prevent people from seeing username & password.
   url: <%= ENV['DATABASE_URL'] %>
-

@@ -5,21 +5,22 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Item.destroy_all
 
 Item.create!(title: 'Funny Face',
   description: 'ink on board',
   width: 7.50,
-  height: 4.50, 
+  height: 4.50,
   lister_id: 1,
   email: 'lolarabbit@gmail.com',
-  img_loc: '/assets/funny_face.png', 
+  img_loc: '/assets/funny_face.png',
   img_sml_loc: '/assets/funny_face_sml.png')
 
 Item.create!(title: 'Funky Hair',
   description: 'ink on board',
   width: 3.75,
-  height: 3.50, 
+  height: 3.50,
   lister_id: 2,
   email: 'davebear@gmail.com',
-  img_loc: '/assets/funky_hair.png', 
+  img_loc: '/assets/funky_hair.png',
   img_sml_loc: '/assets/funky_hair_sml.png')
