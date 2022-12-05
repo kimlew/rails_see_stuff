@@ -30,3 +30,4 @@ Rakefile
 junk
 *_results.txt
 .vscode/
+.DS_Store
