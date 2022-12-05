@@ -7,7 +7,7 @@
 default: &default
   adapter: sqlite3
   database: db/development.sqlite3
-  encoding: unicode
+  encoding: utf8
   pool: 5
   timeout: 5000
 
@@ -17,8 +17,6 @@ development:
   encoding: utf8
   database: db/development.sqlite3 # rails-see-stuff_development
   pool: 5
-  username: root
-  password:
   socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -32,4 +30,5 @@ production:
   <<: *default
   # Replaced all previous settings with just 1 line that Heroku sets for the environment
   # Note: Use ENVIRONMENT variables to prevent people from seeing username & password.
-  url: <%= ENV['DATABASE_URL'] %>
+  database: db/production.sqlite3
+  #url: <%= ENV['DATABASE_URL'] %>
