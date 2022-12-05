@@ -2,44 +2,63 @@
 
 # NAME: launch_app.sh
 #
-# BRIEF: This script installs packages needed in the environment to run the
-# See Stuff application and then runs it locally.
+# BRIEF: This script installs packages needed in the environment and then
+# uses rails commands needed to launch the See Stuff web application (vs.
+# having it as 1 very long line in the Dockerfile's CMD directive).
+# Then the app, which is deployed on AWS, runs.
 #
 # AUTHOR: Kim Lew
 
-set -e
+set -ex
+
+echo "LAUNCHING See Stuff web app..."
+echo
+
+APP_DIR=/home/ubuntu/rails_see_stuff
 
 check_current_directory () {
-  if [[ ! -d '../rails_see_stuff' ]]; then
-    echo 'You must be in the directory, rails_see_stuff, after cloning the code'
-    echo 'from https://github.com/kimlew/rails_see_stuff'
-    exit 1
+  if [ ! -d "${APP_DIR}" ]; then
+    cd "${APP_DIR}"
   fi
 }
 
 check_if_rbenv_installed () {
   if ! command -v rbenv > /dev/null; then
-    echo 'You must install the package manager, rbenv. For example, install with:'
-    echo 'sudo apt install rbenv OR'
-    echo 'brew install rbenv ruby-build'
-    exit 1
+    echo 'Installing the package manager, rbenv.'
+    sudo apt install -y rbenv ruby-build
   fi
 }
 
 check_current_directory
 check_if_rbenv_installed
 
-# Use specific version of Ruby for project that works with Rails 7.
-# Install bundler which is required for rake commands for the database & items.
+# Use specific version of Ruby for project that works with Rails 7. 
+# Install Ruby.
+
+# sudo apt remove ruby -y
+# sudo apt install ruby 3.1.2 -y
+rbenv install 3.1.2
 rbenv local 3.1.2
 eval "$(rbenv init -)"
+# Install bundler which is required for rake commands for the database & items.
 gem install bundler -v 2.3.22
 bundle install
 
-rake db:drop
-rake db:create
-rake db:migrate
-rake db:seed
+# Create the new db, load the schema, & seed the db.
+# rails db:drop
+# rails db:create
+rails db:migrate RAILS_ENV=development
+rails db:seed
 
-rails server
-# View in browser at: http://localhost:3000
+# These commands do not need to say ssh to run shell commands on Deployment 
+# Machine, e.g. AWS, since main.sh uses the ssh command to call this script.
+# Within this script, you are on AWS. Change into the app's directory & run the app.
+# TEST ssh with, e.g., ssh -i <full path>/key.pem ec2-user@34.213.67.66
+# B4: ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- cd /home/ubuntu/rails_see_stuff \&\& rails server -b 0.0.0.0
+echo "Running See Stuff web app..."
+echo
+rails server -b 0.0.0.0
+
+# View app in browser at:
+#  locally: http://localhost:48017
+#  after deployed on AWS at IP address, e.g., https://54.190.12.61/
