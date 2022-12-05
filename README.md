@@ -9,6 +9,9 @@ This migrates a previous Rails project that used Ruby 2.6.1, Rails 5.2.4.3 and S
 
 The application is a view-only site. It does NOT use Rails scaffolding, i.e., does NOT include the standard CRUD actions.
 
+## To run the application on AWS
+
+
 ## To run the application locally:
 
 1. Run: `git clone git@github.com:kimlew/rails_see_stuff.git`
