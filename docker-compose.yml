@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  # No db server since uses MySQLite database.
+
+  see_stuff:
+    build: .
+    image: "rails_see_stuff_container"
+    restart: always
+    ports:
+      # Port forwarding on Mac:Port on db container
+      # Format: "${HOST}:"${CONTAINER}
+      # 48017 - PORT_ASSIGNED_ON_HOST_FOR_WEB_APP
+      # 3000  - PORT_RAILS_WEB_SERVER_DEFAULT
+      - "48017:3000"
