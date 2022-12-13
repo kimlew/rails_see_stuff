@@ -2,10 +2,10 @@
 
 # NAME: launch_app.sh
 #
-# BRIEF: This script installs packages needed in the environment and then
-# uses rails commands needed to launch the See Stuff web application (vs.
-# having it as 1 very long line in the Dockerfile's CMD directive).
-# Then the app, which is deployed on AWS, runs.
+# BRIEF: This script installs packages needed in the environment, clones the 
+# project repository and then uses rails commands needed to launch the See Stuff
+# web application (vs. having it as 1 very long line in the Dockerfile's 
+# CMD directive). Then the app, which is deployed on AWS, runs.
 #
 # AUTHOR: Kim Lew
 
@@ -22,27 +22,23 @@ check_current_directory () {
   fi
 }
 
-check_if_rbenv_installed () {
-  if ! command -v rbenv > /dev/null; then
-    echo 'Installing the package manager, rbenv.'
-    sudo apt install -y rbenv ruby-build
-  fi
-}
 
 check_current_directory
-check_if_rbenv_installed
 
-# Use specific version of Ruby for project that works with Rails 7. 
-# Install Ruby.
+echo "CLONING See Stuff web app from GitHub..."
+git clone --depth 1 --branch v2.0 https://github.com/kimlew/rails_see_stuff
+echo
+cd "${APP_DIR}"
 
-# sudo apt remove ruby -y
-# sudo apt install ruby 3.1.2 -y
-rbenv install 3.1.2
-rbenv local 3.1.2
-eval "$(rbenv init -)"
-# Install bundler which is required for rake commands for the database & items.
-gem install bundler -v 2.3.22
+# Install bundler which is required for rails database commands.
+echo "INSTALLING bundler..."
+echo "gem: --no-document" > ~/.gemrc
+sudo gem install bundler -v 2.3.22
 bundle install
+
+echo "CHECKING where gems are installed with the home argument..."
+gem env home
+echo
 
 # Create the new db, load the schema, & seed the db.
 # rails db:drop
@@ -55,7 +51,7 @@ rails db:seed
 # Within this script, you are on AWS. Change into the app's directory & run the app.
 # TEST ssh with, e.g., ssh -i <full path>/key.pem ec2-user@34.213.67.66
 # B4: ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- cd /home/ubuntu/rails_see_stuff \&\& rails server -b 0.0.0.0
-echo "Running See Stuff web app..."
+echo "RUNNING the See Stuff web app..."
 echo
 rails server -b 0.0.0.0
 
