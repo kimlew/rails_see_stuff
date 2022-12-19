@@ -19,6 +19,7 @@ check_current_directory () {
     cd "${THE_DIR}"
   fi
 }
+
 check_existing_project_directory () {
   if [ -d "${ROOT_DIR}"/"${PROJECT_DIR}" ]; then
     echo "A previous " "${PROJECT_DIR}" "exists. Removing it for a clean start state."
@@ -41,10 +42,13 @@ check_if_rbenv_installed () {
     # echo 'Installing the package manager, rbenv.'
     # sudo apt install -y rbenv
   fi
-  echo "rbenv IS installed. Here is some INFO about rbenv:"
-  type rbenv
+  echo
+  echo "rbenv IS INSTALLED. rbenv VERSION and INFO about rbenv:"
   rbenv -v
+  type rbenv
+  echo
 }
+
 check_if_ruby_installed () {
   if ! command -v ruby > /dev/null; then
     echo "Ruby is NOT installed"
@@ -52,8 +56,10 @@ check_if_ruby_installed () {
     # echo 'Installing the package manager, rbenv.'
     # sudo apt install -y rbenv
   fi
-  echo "Ruby is installed and the version is: "
+  echo
+  echo "Ruby IS INSTALLED and the version is: "
   ruby -v
+  echo
 }
 
 check_current_directory "${ROOT_DIR}"
@@ -100,7 +106,7 @@ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 # shellcheck disable=SC2016
 echo 'eval "$(~/.rbenv/bin/rbenv init - bash)"' >> ~/.bashrc
 
-# Restart your shell so that these changes take effect.
+# RESTART YOUR SHELL - so that these changes take effect.
 # shellcheck disable=SC1090,SC1091
 eval "$(~/.rbenv/bin/rbenv init - bash)"
 echo
@@ -136,7 +142,7 @@ echo
 # install a Ruby version:       rbenv install 3.1.2
 # Using rbenv, install specific Ruby version for project that works with Rails 7.
 echo
-echo "INSTALLING rbenv with intaller & then SPECIFIC RUBY VERSION with ruby-build using rbenv command..."
+echo "INSTALLING rbenv with installer & then SPECIFIC RUBY VERSION with ruby-build using rbenv command..."
 # sudo apt remove --autoremove ruby -y
 
 echo "CHECKING the state of your rbenv installation..."
@@ -144,17 +150,35 @@ echo "CHECKING the state of your rbenv installation..."
 curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-doctor | bash
 echo
 
-echo "INSTALLING Ruby 3.1.2"
+echo "LISTING Ruby versions already installed..."
+rbenv install -l
 echo
+
+echo "SEEING if Ruby 3.1.2 is on system...CURRENTLY has:"
 # https://github.com/rbenv/rbenv/blob/master/README.md#basic-git-checkout
 # If the rbenv install command isn't found, install ruby-build as a plugin:
 # git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
-rbenv install -l
-CONFIGURE_OPTS="--disable-install-rdoc" rbenv install 3.1.2
-rbenv global 3.1.2 # Sets system-wide default Ruby version, i.e., tells rbenv what Ruby version to use.
-rbenv local 3.1.2 # Specifies Ruby version for your project & creates .ruby-version file in the current directory.
-rbenv rehash
+ruby -v
 echo
+
+# Check with: rbenv install -l (all installed versions) vs. ruby -v (system)
+# B4: if ruby -v | grep -q "^ruby 3.1.2"; then
+if rbenv install -l | grep -q "3.1.2"; then
+  echo "The instance already HAS Ruby 3.1.2 so going to next step."
+else
+  echo "INSTALLING Ruby 3.1.2 since the instance does NOT have it..."
+  echo
+  # Add rbenv option to show progress of an rbenv command so I see more info.
+  CONFIGURE_OPTS="--disable-install-rdoc" rbenv install --verbose 3.1.2
+  echo "The system now has the Ruby version:"
+  ruby -v
+fi
+echo
+
+# rbenv global 3.1.2 # Sets system-wide default Ruby version, i.e., tells rbenv what Ruby version to use.
+# rbenv local 3.1.2 # Specifies Ruby version for your project & creates .ruby-version file in the current directory.
+# rbenv rehash
+# echo
 
 echo "CHECKING installation of rbenv..."
 check_if_rbenv_installed
