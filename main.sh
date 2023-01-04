@@ -25,17 +25,20 @@ echo
 echo "SETTING UP See Stuff..."
 echo
 
-SRC_DIR_LOCAL='/Users/kimlew/code/ruby3_rails7_sqlite_see_stuff/rails_see_stuff/' # On Mac.
-DEST_ON_AWS='/home/ubuntu/' # Path to root directory on deployment machine/AWS.
-
-# These lines run on your local computer.
+# These lines run on your local computer, e.g., Mac.
 chmod u+x copy_files_to_aws.sh
 ./copy_files_to_aws.sh "${PEM_KEY}" "${IP_ADDR}"
 
-# These next ssh lines run in a shell on Deployment Machine/AWS.
+# These next ssh lines run in a shell on Deployment Machine, e.g., AWS EC2 instance.
 # TEST ssh with, e.g., ssh -i <full path>/key.pem ec2-user@34.213.67.66
 ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- chmod u+x setup_machine.sh \&\& \
   ./setup_machine.sh
+
+echo "CLONING See Stuff repo from GitHub..."
+# BAD since no Docker & Docker Compose: git clone --depth 1 --branch v2.0 https://github.com/kimlew/rails_see_stuff
+# BETTER with Docker & Docker Compose: git clone <this branch>
+# BEST & Later: Push Docker image to DockerHub.com & omit git clone step.
+ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- git clone -b see-stuff-in-docker git@github.com:kimlew/rails_see_stuff.git
 
 # CHECK 1: Manually ssh & ls to verify files were copied to AWS.
 # CHECK 2: Run these verification lines but UNCOMMENT later: 
@@ -48,18 +51,38 @@ ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- docker -v
 ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- docker compose version
 echo
 
-# Run docker command to run web app.
+# Run web app with docker compose command.
 # Group nohup command with { } so only that 1 command runs in background.  
+# B4 had these lines:
 # ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- chmod u+x launch_app.sh \&\& \
 #   \{ nohup ./launch_app.sh \& \}
-echo "Copying Docker & docker-compose.yml to project folder on AWS:"
+# echo "Copying Docker & docker-compose.yml to project folder on AWS..."
+# echo
+# scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"Dockerfile ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"Dockerfile
+# scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"docker-compose.yml ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"docker-compose.yml
 echo
-scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"Dockerfile ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"Dockerfile
-scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"docker-compose.yml ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"docker-compose.yml
-echo "Running Docker Compose command to start app:"
+
+echo "CHECK if docker group exists on EC2 instance. If not adds group. Also adds your user to group."
+echo
+ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- <<'EOF'
+  groups
+  echo
+  if groups | grep -q "docker"; then
+    echo "Adding $USER to docker group."
+    sudo usermod -aG docker $USER
+  else
+    echo "Creating docker group & adding $USER to docker group."
+    sudo groupadd docker || sudo newgrp docker &&
+    sudo usermod -aG docker $USER
+  fi
+  echo
+EOF
+
+echo
+echo "Running Docker Compose command to start app..."
 echo
 ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- \{ nohup docker compose up --build \& \}
-echo "Listing active containers:"
+echo "Listing active containers..."
 ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- docker compose ps
 echo
 # In a Browser Tab: See the running app at the IP address, e.g., https://54.190.12.61/
