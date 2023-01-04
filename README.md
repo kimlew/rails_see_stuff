@@ -9,18 +9,30 @@ This puts a Rails project migrated from Ruby 2.6.1, Rails 5.2.4.3 and SQLite, to
 
 The application is a view-only site. It does NOT use Rails scaffolding, i.e., does NOT include the standard CRUD actions.
 
-## To run the application in Docker on AWS
+## To run the app that is in a Docker container and Deployed on AWS
 
 1. Run: `main.sh'
    
 2. Go to a browser and see the running app at the IP address, e.g., `<https://54.190.12.61/>`
 
-## To run the application in Docker locally:
+
+## To locally run the app that is in a Docker container using Docker Compose
+
+1. Clone the repo: `git clone git@github.com:kimlew/rails_see_stuff.git`
+
+2. Change to project directory with: `cd rails_see_stuff`
+
+3. Run: `docker compose up --build`
+   
+4. Go to the browser address: `<http://localhost:48017/>`
+
+
+## To locally run the app by running a shell script
 
 1. Run: `git clone git@github.com:kimlew/rails_see_stuff.git`
 
 2. Change to project directory with: `cd rails_see_stuff`
 
-3. Run: `docker run`     Before was: `bash init_and_run_app.sh`
+3. Run: `bash init_and_run_app.sh`
 
 4. Go to the browser address: `<http://localhost:3000/>`
