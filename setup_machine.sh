@@ -63,7 +63,7 @@ echo
 
 # https://docs.docker.com/engine/install/ubuntu/
 # --batch - to get rid of error: gpg: cannot open '/dev/tty': No such device or address
-echo "ADD Docker’s official GPG key..."
+echo "ADD official GPG key of Docker..."
 sudo mkdir -p /etc/apt/keyrings
 # curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --batch --dearmor -o /etc/apt/keyrings/docker.gpg
 # curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --batch --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -110,18 +110,21 @@ sudo apt update -y
 #   Version table:
 #      5:20.10.14~3-0~ubuntu-jammy 500
 #         500 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
-#      5:20.10.13~3-0~ubuntu-jammy 500
-#         500 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
 apt-cache policy docker-ce
 
-# Install Docker. 
+# Install Docker. Docker should now be installed, the daemon started & the 
+# process enabled to start on boot. Check that it’s running. If not, start Docker. 
 sudo apt install docker-ce -y
+# Automatically starts the docker daemon at boot: sudo systemctl enable docker
+# vs. just starting it again at every boot: sudo systemctl start docker
 
 # Check Docker is running, i.e Docker is installed, the daemon is started & 
 # the process is enabled to start on boot.
-echo "CHECK Docker version & that it was installed: "
+echo
+echo "CHECK Docker version & Docker STARTED after installation: "
 docker -v
-sudo systemctl status docker
+sudo service docker status || sudo service docker start
+sudo chmod u+x /var/run/docker.sock
 echo
 
 # --- Docker Compose Installation ---
@@ -145,10 +148,10 @@ echo
 mkdir -p ~/.docker/cli-plugins/
 sudo curl -SL https://github.com/docker/compose/releases/download/v2.14.2/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
 sudo chmod +x ~/.docker/cli-plugins/docker-compose
-echo "CHECK Docker Compose was installed: "
+echo "CHECK Docker Compose version installed: "
 docker compose version
 echo
 
-# At this point at the end of script, you are passed back to main.sh and onto
+# At this point at the end of script, you are passed back to main.sh & onto
 # next command with docker compose up --build (which in turn, runs launch_app.sh 
 # & runs the See Stuff web app).
