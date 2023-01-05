@@ -8,8 +8,8 @@ services:
     image: "rails_see_stuff_container"
     restart: always
     ports:
-      # Port forwarding on Mac:Port on db container
-      # Format: "${HOST}:"${CONTAINER}
+      # Example with a database: Port forwarding on Mac:Port on db container
+      # Here: IN port for "${HOST} AWS :IN port for "${CONTAINER}
       # 48017 - PORT_ASSIGNED_ON_HOST_FOR_WEB_APP
       # 3000  - PORT_RAILS_WEB_SERVER_DEFAULT
       - "48017:3000"
