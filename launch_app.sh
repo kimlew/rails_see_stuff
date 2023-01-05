@@ -9,10 +9,8 @@
 
 set -e
 
-# TODO: Need to clone to root of Docker container, not root of Ubuntu machine
-# TODO: OR push Dockerfile & docker-compose.yml to DockerHub.
-# APP_DIR="/home/ubuntu/rails_see_stuff"
-APP_DIR="/opt/rails_see_stuff"
+# APP_DIR="/home/ubuntu/rails_see_stuff" # This is root of AWS EC2 instance.
+APP_DIR="/opt/rails_see_stuff" # This is root of Docker container.
 
 check_current_directory () {
   if [[ ! -d '../rails_see_stuff' ]]; then
