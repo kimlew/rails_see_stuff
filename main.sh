@@ -38,7 +38,16 @@ echo "CLONING See Stuff repo from GitHub..."
 # BAD since no Docker & Docker Compose: git clone --depth 1 --branch v2.0 https://github.com/kimlew/rails_see_stuff
 # BETTER with Docker & Docker Compose: git clone <this branch>
 # BEST & Later: Push Docker image to DockerHub.com & omit git clone step.
-ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- git clone -b see-stuff-in-docker git@github.com:kimlew/rails_see_stuff.git
+# ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- git clone -b see-stuff-in-docker https://github.com/kimlew/rails_see_stuff.git
+ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" <<EOF
+set -e
+if ! [ -d rails_see_stuff ]; then
+  git clone -b see-stuff-in-docker https://github.com/kimlew/rails_see_stuff.git
+else
+  cd rails_see_stuff
+  git pull
+fi
+EOF
 
 # CHECK 1: Manually ssh & ls to verify files were copied to AWS.
 # CHECK 2: Run these verification lines but UNCOMMENT later: 
@@ -52,37 +61,28 @@ ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- docker compose version
 echo
 
 # Run web app with docker compose command.
-# Group nohup command with { } so only that 1 command runs in background.  
-# B4 had these lines:
-# ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- chmod u+x launch_app.sh \&\& \
-#   \{ nohup ./launch_app.sh \& \}
-# echo "Copying Docker & docker-compose.yml to project folder on AWS..."
-# echo
-# scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"Dockerfile ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"Dockerfile
-# scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"docker-compose.yml ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"docker-compose.yml
-echo
-
-echo "CHECK if docker group exists on EC2 instance. If not adds group. Also adds your user to group."
+# Group nohup command with { } so only that 1 command runs in background.
+# -v, --invert-match. Selected lines are those not matching any of the specified 
+# patterns. -q , --quiet, --silent. Quiet mode: suppress normal output
+echo "ADD if no docker group on EC2 instance. ADD also your user to group."
 echo
 ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- <<'EOF'
+  echo "The groups are: "
   groups
   echo
-  if groups | grep -q "docker"; then
-    echo "Adding $USER to docker group."
-    sudo usermod -aG docker $USER
-  else
+  if groups | grep -qv "docker"; then
     echo "Creating docker group & adding $USER to docker group."
     sudo groupadd docker || sudo newgrp docker &&
-    sudo usermod -aG docker $USER
+    echo
+  echo "Adding $USER to docker group."
+  sudo usermod -aG docker $USER
   fi
-  echo
 EOF
-
 echo
+
 echo "Running Docker Compose command to start app..."
 echo
-ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- \{ nohup docker compose up --build \& \}
-echo "Listing active containers..."
-ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- docker compose ps
+ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- cd rails_see_stuff \&\& \
+\{ nohup docker compose up --build \& \} \&\& docker compose ps
 echo
 # In a Browser Tab: See the running app at the IP address, e.g., https://54.190.12.61/
