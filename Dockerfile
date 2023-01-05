@@ -23,9 +23,7 @@ RUN echo "COPYING Gemfile, Gemfile & launch_app.sh .lock into Docker container f
 COPY Gemfile .
 COPY Gemfile.lock .
 COPY launch_app.sh .
-
-# TODO: Put into .dockerignore: .git, main.sh, copy_files_to_aws.sh, setup_machine.sh, etc.
-# RUN cd rails_see_stuff
+RUN echo
 RUN ls -lah
 RUN echo
 
@@ -33,7 +31,6 @@ RUN echo
 RUN echo "INSTALLING rails 7 & bundler 2.3.22..."
 RUN echo "gem: --no-document" > ~/.gemrc
 RUN gem install rails -v 7 && gem install bundler -v 2.3.22
-# bundle check || bundle install
 RUN bundle install
 RUN echo
 
