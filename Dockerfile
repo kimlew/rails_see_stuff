@@ -20,9 +20,10 @@ RUN ls -lah
 RUN echo
 
 RUN echo "COPYING Gemfile, Gemfile & launch_app.sh .lock into Docker container from root of AWS EC2 instance."
-COPY Gemfile .
-COPY Gemfile.lock .
-COPY launch_app.sh .
+# COPY Gemfile .
+# COPY Gemfile.lock .
+# COPY launch_app.sh .
+COPY . .
 RUN echo
 RUN ls -lah
 RUN echo
