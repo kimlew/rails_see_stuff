@@ -11,9 +11,13 @@ The application is a view-only site. It does NOT use Rails scaffolding, i.e., do
 
 ## To run the app that is in a Docker container and Deployed on AWS
 
-1. Run: `main.sh'
+1. Create an EC2 instance on AWS with an Ubuntu image and at least a t2.micro size.
    
-2. Go to a browser and see the running app at the IP address, e.g., `<https://54.190.12.61/>`
+2. Create a security rule for TCP to use port 48017 and use that with the instance.
+   
+3. Run: `main.sh'
+   
+4. Go to a browser and see the running app. Use the IP address of the instance and port, e.g., `http://54.190.12.61:48017`
 
 
 ## To locally run the app that is in a Docker container using Docker Compose
