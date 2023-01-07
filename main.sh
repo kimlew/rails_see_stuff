@@ -39,14 +39,14 @@ echo "CLONING See Stuff repo from GitHub..."
 # BETTER with Docker & Docker Compose: git clone <this branch>
 # BEST & Later: Push Docker image to DockerHub.com & omit git clone step.
 # ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- git clone -b see-stuff-in-docker https://github.com/kimlew/rails_see_stuff.git
-ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" <<EOF
-set -e
-if ! [ -d rails_see_stuff ]; then
-  git clone -b see-stuff-in-docker https://github.com/kimlew/rails_see_stuff.git
-else
-  cd rails_see_stuff
-  git pull
-fi
+ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- /bin/sh <<EOF
+  set -e
+  if ! [ -d rails_see_stuff ]; then
+    git clone -b see-stuff-in-docker https://github.com/kimlew/rails_see_stuff.git
+  else
+    cd rails_see_stuff
+    git pull
+  fi
 EOF
 
 # CHECK 1: Manually ssh & ls to verify files were copied to AWS.
@@ -66,7 +66,7 @@ echo
 # patterns. -q , --quiet, --silent. Quiet mode: suppress normal output
 echo "ADD if no docker group on EC2 instance. ADD also your user to group."
 echo
-ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- <<'EOF'
+ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- /bin/sh <<'EOF'
   echo "The groups are: "
   groups
   echo
