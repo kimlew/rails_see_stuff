@@ -1,20 +1,16 @@
 #! /usr/bin/env bash
 
-# Script name: main.sh
+# SCRIPT NAME: main.sh
 
-# Description: This script runs all the other scripts required to copy files to 
-# deployment machine, i.e., AWS, set up the deployment machine and launch the 
-# See Stuff app.
-# Create rails_see_stuff on AWS, create directory, deployment_files, copy 
-# required files & folders from project directory to deployment_files, scp files & 
-# folders from deployment_files to AWS.
+# DESCRIPTION: This script runs scripts required to copy files to the
+# deployment machine, i.e., AWS, sets up the deployment machine and launches the 
+# See Stuff app using docker compose.
 
-# Note: To see meanings of these set flags, type: help set
+# AUTHOR: Kim Lew
+
+# Note: To see meanings of set flags, type: help set
 # set -e  Exits immediately if a command exits with a non-zero status.
 # set -x  Prints commands and their arguments as they are executed.
-
-# Author: Kim Lew
-
 set -e
 
 # Prompt user for PEM_KEY and IP_ADDR. Then read in the variables.

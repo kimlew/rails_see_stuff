@@ -1,9 +1,9 @@
 #! /usr/bin/env bash
 
-# NAME: launch_app.sh
+# SCRIPT NAME: launch_app.sh
 #
-# BRIEF: This script installs packages needed in the environment to run the
-# See Stuff application and then runs it locally.
+# DESCRIPTION: This script installs packages needed in the environment to run
+# the See Stuff app and then runs it locally. The Dockerfile calls this script.
 #
 # AUTHOR: Kim Lew
 

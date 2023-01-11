@@ -1,14 +1,14 @@
 #! /usr/bin/env bash
 
-# Script name: copy_files_to_aws.sh
+# SCRIPT NAME: copy_files_to_aws.sh
 
-# Description: This script is called in main.sh to transfer files needed on the
-# the deployment machine on AWS at its root directory for correct set up and 
-# transfers the project files & folders for the See Stuff web app.
+# DESCRIPTION: This script is called in main.sh to transfer files needed on the
+# the deployment machine on AWS at its root directory for correct set up for 
+# the See Stuff web app.
 
-# Note: Web app files & folders are cloned in setup_machine.sh.
+# Note: Web app files & folders are cloned in main.sh from GitHub repo.
 
-# Author: Kim Lew
+# AUTHOR: Kim Lew
 
 set -e
 

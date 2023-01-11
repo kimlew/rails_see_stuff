@@ -1,13 +1,12 @@
 #! /bin/bash
 
-# Script name: setup_machine.sh
+# SCRIPT NAME: setup_machine.sh
 
-# Description: This script is called by main.sh. It sets up the web server on 
+# DESCRIPTION: This script is called by main.sh. It sets up the web server on 
 # the Deployment Machine/AWS, including installing Docker and Docker Compose on
-# AWS, i.e., is a shell script that sets up EC2 instance for deployment of web 
-# app on AWS.
+# AWS, i.e., sets up EC2 instance for deployment of web app on AWS.
 
-# Author: Kim Lew
+# AUTHOR: Kim Lew
 
 set -ex
 
