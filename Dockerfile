@@ -21,6 +21,11 @@ RUN pwd
 RUN ls -lah
 RUN echo
 
+# Install Rails & Bundler in container. They are required for rails commands for the database, etc.
+RUN echo "INSTALLING rails 7 & bundler 2.3.22..."
+RUN echo "gem: --no-document" > ~/.gemrc
+RUN gem install rails -v 7 && gem install bundler -v 2.3.22
+
 RUN echo "COPYING Gemfile, Gemfile & launch_app.sh .lock into Docker container from root of AWS EC2 instance."
 # COPY Gemfile .
 # COPY Gemfile.lock .
@@ -30,28 +35,7 @@ RUN echo
 RUN ls -lah
 RUN echo
 
-# Install Rails & Bundler in container. They are required for rails commands for the database, etc.
-RUN echo "INSTALLING rails 7 & bundler 2.3.22..."
-RUN echo "gem: --no-document" > ~/.gemrc
-RUN gem install rails -v 7 && gem install bundler -v 2.3.22
 RUN bundle install
-RUN echo
-
-RUN echo "CURRENT system ruby is:"
-RUN ruby -v
-RUN echo
-
-RUN echo "SHOW Rails version..."
-RUN rails -v
-RUN echo
-RUN echo "SHOW bundler version..."
-RUN bundler -v
-RUN echo
-
-RUN echo "SHOW the PATH with gem env: "
-RUN gem env
-RUN echo "SHOW where gems are installed with the home argument with: gem env home"
-RUN gem env home
 RUN echo
 
 # TEST if container working right by running a shell. Comment out after test
@@ -66,8 +50,11 @@ RUN echo
 # See running app locally at: http://localhost:3000/
 
 # Start/Run the main process.
+RUN echo "LAUNCHING See Stuff"
 RUN chmod +x launch_app.sh
-CMD [ "/bin/bash", "-c", "bash launch_app.sh" ]
+# CMD [ "/bin/bash", "-c", "bash launch_app.sh" ]
+# CMD [ "/bin/bash", "-f", "launch_app.sh" ]
+CMD [ "${INSTALL_DIR}/launch_app.sh" ]
 
 # With Docker & Docker Compose, see locally running app at: http://localhost:48017
 # Note: Runs in container on port 3000 but I forwarded port to 48017.
