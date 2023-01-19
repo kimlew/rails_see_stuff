@@ -15,7 +15,7 @@ The application is a view-only site. It does NOT use Rails scaffolding, i.e., do
    
 2. Create a security rule for TCP to use port 48017 and use that with the instance.
    
-3. Run: `main.sh'
+3. Run: `main.sh`
    
 4. Go to a browser and see the running app. Use the IP address of the instance and port, e.g., `http://54.190.12.61:48017`
 
