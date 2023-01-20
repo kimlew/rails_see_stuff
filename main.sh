@@ -56,10 +56,9 @@ ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- docker -v
 ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- docker compose version
 echo
 
-# Run web app with docker compose command.
-# Group nohup command with { } so only that 1 command runs in background.
-# -v, --invert-match. Selected lines are those not matching any of the specified 
-# patterns. -q , --quiet, --silent. Quiet mode: suppress normal output
+# Add docker group & user to docker group.
+# -v, --invert-match. Selected lines are those not matching any of the  
+# specified patterns. -q , --quiet, --silent. Quiet mode: suppress normal output
 echo "ADD if no docker group on EC2 instance. ADD also your user to group."
 echo
 ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- /bin/sh <<'EOF'
@@ -76,6 +75,8 @@ ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- /bin/sh <<'EOF'
 EOF
 echo
 
+# Run web app with docker compose command.
+# Group nohup command with { } so only that 1 command runs in background.
 echo "Running Docker Compose command to start app..."
 echo
 ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- cd rails_see_stuff \&\& \
