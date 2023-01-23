@@ -1,45 +1,27 @@
 #! /usr/bin/env bash
 
-# NAME: launch_app.sh
+# SCRIPT NAME: launch_app.sh
 #
-# BRIEF: This script installs packages needed in the environment to run the
-# See Stuff application and then runs it locally.
+# DESCRIPTION: This script installs packages needed in the environment to run
+# the See Stuff app and then runs it locally. The Dockerfile calls this script.
 #
 # AUTHOR: Kim Lew
 
 set -e
 
-check_current_directory () {
-  if [[ ! -d '../rails_see_stuff' ]]; then
-    echo 'You must be in the directory, rails_see_stuff, after cloning the code'
-    echo 'from https://github.com/kimlew/rails_see_stuff'
-    exit 1
-  fi
-}
+APP_DIR="/opt/rails_see_stuff" # This is root of Docker container.
 
-check_if_rbenv_installed () {
-  if ! command -v rbenv > /dev/null; then
-    echo 'You must install the package manager, rbenv. For example, install with:'
-    echo 'sudo apt install rbenv OR'
-    echo 'brew install rbenv ruby-build'
-    exit 1
-  fi
-}
+cd "${APP_DIR}"
+echo
+echo "RUNNING rails commands and starting the app..."
+# Create the new db, load the schema, & seed the db.
+# rake db:drop
+# rake db:create
+rails db:migrate RAILS_ENV=development
+rails db:seed
+echo
 
-check_current_directory
-check_if_rbenv_installed
-
-# Use specific version of Ruby for project that works with Rails 7.
-# Install bundler which is required for rake commands for the database & items.
-rbenv local 3.1.2
-eval "$(rbenv init -)"
-gem install bundler -v 2.3.22
-bundle install
-
-rake db:drop
-rake db:create
-rake db:migrate
-rake db:seed
-
-rails server
-# View in browser at: http://localhost:3000
+rails server -b 0.0.0.0
+# See web app in browser:
+# - locally with Docker Compose (port forwarded 3000 in container to 48017): <http://localhost:48017/>
+# - on web host with AWS EC2 instance, at IP address, e.g., https://54.190.12.61/
