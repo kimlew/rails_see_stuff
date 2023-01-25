@@ -8,10 +8,9 @@ RUN apt update && apt install -y \
   rbenv
 
 # Set default working directory as app's root directory.
-# opt directory is in the container & it might be diff than regular Ubuntu
-# Many people create a directory under root.
-#ROOT_DIR='/home/ubuntu'
-# Convention: /opt/app_name - to store applications
+# opt - many people create this directory in the contaner under root
+# Convention: /opt/app_name - place to store applications
+# Note: Ubuntu machine has root directory, /home/ubuntu.
 ENV INSTALL_PATH /opt/rails_see_stuff
 RUN mkdir -p $INSTALL_PATH
 WORKDIR $INSTALL_PATH
@@ -26,10 +25,7 @@ RUN echo "INSTALLING rails 7 & bundler 2.3.22..."
 RUN echo "gem: --no-document" > ~/.gemrc
 RUN gem install rails -v 7 && gem install bundler -v 2.3.22
 
-RUN echo "COPYING Gemfile, Gemfile & launch_app.sh .lock into Docker container from root of AWS EC2 instance."
-# COPY Gemfile .
-# COPY Gemfile.lock .
-# COPY launch_app.sh .
+RUN echo "COPYING all files, includ. Gemfile, Gemfile.lock & launch_app.sh into Docker container from root of AWS EC2 instance."
 COPY . .
 RUN echo
 RUN ls -lah
@@ -51,10 +47,9 @@ RUN echo
 
 # Start/Run the main process.
 RUN echo "LAUNCHING See Stuff"
-RUN chmod +x launch_app.sh
-# CMD [ "/bin/bash", "-c", "bash launch_app.sh" ]
-# CMD [ "/bin/bash", "-f", "launch_app.sh" ]
-CMD [ "${INSTALL_DIR}/launch_app.sh" ]
+# Note: /bin/bash is the executable program & already has permissions to execute
+# scripts, so no chmod +x needed.
+CMD [ "/bin/bash", "-f", "launch_app.sh" ] 
 
 # With Docker & Docker Compose, see locally running app at: http://localhost:48017
 # Note: Runs in container on port 3000 but I forwarded port to 48017.
