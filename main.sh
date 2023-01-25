@@ -30,21 +30,6 @@ chmod u+x copy_files_to_aws.sh
 ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- chmod u+x setup_machine.sh \&\& \
   ./setup_machine.sh
 
-echo "CLONING See Stuff repo from GitHub..."
-# BAD since no Docker & Docker Compose: git clone --depth 1 --branch v2.0 https://github.com/kimlew/rails_see_stuff
-# BETTER with Docker & Docker Compose: git clone <this branch>
-# BEST & Later: Push Docker image to DockerHub.com & omit git clone step.
-# ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- git clone -b see-stuff-in-docker https://github.com/kimlew/rails_see_stuff.git
-ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- /bin/sh <<EOF
-  set -e
-  if ! [ -d rails_see_stuff ]; then
-    git clone -b see-stuff-in-docker https://github.com/kimlew/rails_see_stuff.git
-  else
-    cd rails_see_stuff
-    git pull
-  fi
-EOF
-
 # CHECK 1: Manually ssh & ls to verify files were copied to AWS.
 # CHECK 2: Run these verification lines but UNCOMMENT later: 
 echo "Current directory & files copied over are:"
