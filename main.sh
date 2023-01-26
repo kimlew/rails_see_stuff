@@ -60,10 +60,9 @@ ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- /bin/sh <<'EOF'
 EOF
 echo
 
-# Run web app with docker compose command.
-# Group nohup command with { } so only that 1 command runs in background.
+# Run web app. Group nohup command with { } so ONLY that 1 command runs in background.
 echo "Running Docker Compose command to start app..."
 echo
-ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- \{ nohup docker compose up \& \} \&\& docker compose ps
+ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- \{ nohup docker compose up \& \}
 echo
 # In a Browser Tab: See the running app at the IP address, e.g., http://IPaddress:48017
