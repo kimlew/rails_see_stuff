@@ -64,7 +64,6 @@ echo
 # Group nohup command with { } so only that 1 command runs in background.
 echo "Running Docker Compose command to start app..."
 echo
-ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- cd rails_see_stuff \&\& \
-\{ nohup docker compose up \& \} \&\& docker compose ps
+ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- \{ nohup docker compose up \& \} \&\& docker compose ps
 echo
-# In a Browser Tab: See the running app at the IP address, e.g., https://54.190.12.61/
+# In a Browser Tab: See the running app at the IP address, e.g., http://IPaddress:48017
