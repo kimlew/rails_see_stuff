@@ -6,7 +6,7 @@
 # the deployment machine on AWS at its root directory for correct set up for 
 # the See Stuff web app.
 
-# Note: Web app files & folders are cloned in main.sh from GitHub repo.
+# Note: Web app files & folders are part of Docker image.
 
 # AUTHOR: Kim Lew
 
@@ -25,9 +25,9 @@ DEST_ON_AWS='/home/ubuntu/' # Path to root directory on deployment machine/AWS.
 # Note: /home/ubuntu/ - is root on AWS EC2 instance with Ubuntu 22.04.
 
 # Copy setup files to root directory on AWS.
-scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"setup_machine.sh ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"setup_machine.sh
 # Since now using the rails-see-stuff image pulled from DockerHub, now:
 # - need docker-compose.yml on the AWS EC2 instance - since not using git clone any more
 # - do not need to scp launch_app.sh - since that is part of Docker image now
 # scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"launch_app.sh ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"launch_app.sh
+scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"setup_machine.sh ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"setup_machine.sh
 scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"docker-compose.yml ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"docker-compose.yml
