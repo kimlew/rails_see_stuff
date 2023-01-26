@@ -9,14 +9,14 @@
 
 set -e
 
-APP_DIR="/opt/rails_see_stuff" # This is root of Docker container.
+APP_DIR="/opt/rails_see_stuff" # Directory is at the root of Docker container.
 
 cd "${APP_DIR}"
 echo
 echo "RUNNING rails commands and starting the app..."
-# Create the new db, load the schema, & seed the db.
-# rake db:drop
-# rake db:create
+# Create the new db, load the schema, & seed the db. Prevent dups with drop & create.
+rails db:drop
+rails db:create
 rails db:migrate RAILS_ENV=development
 rails db:seed
 echo
