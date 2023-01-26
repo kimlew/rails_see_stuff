@@ -53,3 +53,4 @@ CMD [ "/bin/bash", "-f", "launch_app.sh" ]
 
 # With Docker & Docker Compose, see locally running app at: http://localhost:48017
 # Note: Runs in container on port 3000 but I forwarded port to 48017.
+# See on AWS with: http://IPaddress:48017
