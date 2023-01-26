@@ -6,7 +6,7 @@ services:
   see_stuff:
     # build: .
     # image: "rails_see_stuff_container"
-    image: "rails-see-stuff:latest"
+    image: "kimlewcan/rails-see-stuff:latest"
     restart: always
     ports:
       # Example with a database: Port forwarding on Mac:Port on db container
