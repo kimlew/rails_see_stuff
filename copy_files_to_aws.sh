@@ -26,4 +26,8 @@ DEST_ON_AWS='/home/ubuntu/' # Path to root directory on deployment machine/AWS.
 
 # Copy setup files to root directory on AWS.
 scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"setup_machine.sh ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"setup_machine.sh
-scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"launch_app.sh ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"launch_app.sh
+# Since now using the rails-see-stuff image pulled from DockerHub, now:
+# - need docker-compose.yml on the AWS EC2 instance - since not using git clone any more
+# - do not need to scp launch_app.sh - since that is part of Docker image now
+# scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"launch_app.sh ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"launch_app.sh
+scp -i "${PEM_KEY}" "${SRC_DIR_LOCAL}"docker-compose.yml ubuntu@"${IP_ADDR}":"${DEST_ON_AWS}"docker-compose.yml
