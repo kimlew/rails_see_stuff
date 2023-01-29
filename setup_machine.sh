@@ -27,7 +27,7 @@ check_existing_project_directory () {
   fi
 }
 
-# Check if nano already installed & install if not. "" or check exit code?
+# Check if nano already installed & install if not.
 check_if_nano_installed () {
   if ! command -v nano &> /dev/null; then
     sudo apt install nano -y
@@ -48,7 +48,7 @@ check_if_nano_installed
 # Install a few prerequisite packages which let apt use packages over HTTPS.
 sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
 
-echo "CHECK curl verion..."
+echo "CHECKING curl version, which is needed to add GPG key..."
 curl --version
 echo
 

@@ -2,8 +2,8 @@
 
 # SCRIPT NAME: launch_app.sh
 #
-# DESCRIPTION: This script installs packages needed in the environment to run
-# the See Stuff app and then runs it locally. The Dockerfile calls this script.
+# DESCRIPTION: This script is called by the Dockerfile. It creates & runs the 
+# See Stuff web app.
 #
 # AUTHOR: Kim Lew
 

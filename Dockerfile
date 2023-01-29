@@ -1,6 +1,6 @@
 FROM ruby:3.1.2 AS rails-toolbox
 
-LABEL Description="This image is used to start the See Stuff web app"
+LABEL Description="This image is used to start the See Stuff web app."
 
 RUN apt update && apt install -y \
   nodejs \
@@ -34,23 +34,12 @@ RUN echo
 RUN bundle install
 RUN echo
 
-# TEST if container working right by running a shell. Comment out after test
-# since only 1 CMD allowed per Dockerfile & need that 1 CMD to run web app.
-#CMD ["/bin/sh"]
-
-# RUN echo "RUN app LOCALLY to test if configuration is correct."
-# CMD ["rails", "server", "-b", "0.0.0.0"]
-# Note: The rails server -b parameter - binds rails to all IPs & listens to
-# requests from outside the container. Binding the server to 0.0.0.0 lets you
-# view the app with your server's public IP address.
-# See running app locally at: http://localhost:3000/
-
 # Start/Run the main process.
 RUN echo "LAUNCHING See Stuff"
 # Note: /bin/bash is the executable program & already has permissions to execute
 # scripts, so no chmod +x needed.
 CMD [ "/bin/bash", "-f", "launch_app.sh" ] 
 
-# With Docker & Docker Compose, see locally running app at: http://localhost:48017
+# See locally running app with Docker & Docker Compose at: http://localhost:48017
 # Note: Runs in container on port 3000 but I forwarded port to 48017.
-# See on AWS with: http://IPaddress:48017
+# See running app on AWS with: http://IPaddress:48017

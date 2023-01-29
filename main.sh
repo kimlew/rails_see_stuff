@@ -3,8 +3,8 @@
 # SCRIPT NAME: main.sh
 
 # DESCRIPTION: This script runs scripts required to copy files to the
-# deployment machine, i.e., AWS, sets up the deployment machine and launches the 
-# See Stuff app using docker compose.
+# deployment machine, i.e., AWS, sets up the deployment machine that has a  
+# Docker container and  launches the See Stuff app using docker compose.
 
 # AUTHOR: Kim Lew
 
@@ -25,7 +25,7 @@ echo
 chmod u+x copy_files_to_aws.sh
 ./copy_files_to_aws.sh "${PEM_KEY}" "${IP_ADDR}"
 
-# These next ssh lines run in a shell on Deployment Machine, e.g., AWS EC2 instance.
+# These commands run in a shell on Deployment Machine, e.g., AWS EC2 instance.
 # TEST ssh with, e.g., ssh -i <full path>/key.pem ec2-user@34.213.67.66
 ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- chmod u+x setup_machine.sh \&\& \
   ./setup_machine.sh
