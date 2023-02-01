@@ -2,21 +2,21 @@
 
 # SCRIPT NAME: launch_app.sh
 #
-# DESCRIPTION: This script installs packages needed in the environment to run
-# the See Stuff app and then runs it locally. The Dockerfile calls this script.
+# DESCRIPTION: This script is called by the Dockerfile. It creates & runs the 
+# See Stuff web app.
 #
 # AUTHOR: Kim Lew
 
 set -e
 
-APP_DIR="/opt/rails_see_stuff" # This is root of Docker container.
+APP_DIR="/opt/rails_see_stuff" # Directory is at the root of Docker container.
 
 cd "${APP_DIR}"
 echo
 echo "RUNNING rails commands and starting the app..."
-# Create the new db, load the schema, & seed the db.
-# rake db:drop
-# rake db:create
+# Create the new db, load the schema, & seed the db. Prevent dups with drop & create.
+rails db:drop
+rails db:create
 rails db:migrate RAILS_ENV=development
 rails db:seed
 echo

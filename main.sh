@@ -3,8 +3,8 @@
 # SCRIPT NAME: main.sh
 
 # DESCRIPTION: This script runs scripts required to copy files to the
-# deployment machine, i.e., AWS, sets up the deployment machine and launches the 
-# See Stuff app using docker compose.
+# deployment machine, i.e., AWS, sets up the deployment machine that has a  
+# Docker container and  launches the See Stuff app using docker compose.
 
 # AUTHOR: Kim Lew
 
@@ -25,25 +25,10 @@ echo
 chmod u+x copy_files_to_aws.sh
 ./copy_files_to_aws.sh "${PEM_KEY}" "${IP_ADDR}"
 
-# These next ssh lines run in a shell on Deployment Machine, e.g., AWS EC2 instance.
+# These commands run in a shell on Deployment Machine, e.g., AWS EC2 instance.
 # TEST ssh with, e.g., ssh -i <full path>/key.pem ec2-user@34.213.67.66
 ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- chmod u+x setup_machine.sh \&\& \
   ./setup_machine.sh
-
-echo "CLONING See Stuff repo from GitHub..."
-# BAD since no Docker & Docker Compose: git clone --depth 1 --branch v2.0 https://github.com/kimlew/rails_see_stuff
-# BETTER with Docker & Docker Compose: git clone <this branch>
-# BEST & Later: Push Docker image to DockerHub.com & omit git clone step.
-# ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- git clone -b see-stuff-in-docker https://github.com/kimlew/rails_see_stuff.git
-ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- /bin/sh <<EOF
-  set -e
-  if ! [ -d rails_see_stuff ]; then
-    git clone -b see-stuff-in-docker https://github.com/kimlew/rails_see_stuff.git
-  else
-    cd rails_see_stuff
-    git pull
-  fi
-EOF
 
 # CHECK 1: Manually ssh & ls to verify files were copied to AWS.
 # CHECK 2: Run these verification lines but UNCOMMENT later: 
@@ -75,11 +60,9 @@ ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- /bin/sh <<'EOF'
 EOF
 echo
 
-# Run web app with docker compose command.
-# Group nohup command with { } so only that 1 command runs in background.
+# Run web app. Group nohup command with { } so ONLY that 1 command runs in background.
 echo "Running Docker Compose command to start app..."
 echo
-ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- cd rails_see_stuff \&\& \
-\{ nohup docker compose up --build \& \} \&\& docker compose ps
+ssh -i "${PEM_KEY}" ubuntu@"${IP_ADDR}" -- \{ nohup docker compose up \& \}
 echo
-# In a Browser Tab: See the running app at the IP address, e.g., https://54.190.12.61/
+# In a Browser Tab: See the running app at the IP address, e.g., http://IPaddress:48017
