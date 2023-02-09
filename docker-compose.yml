@@ -4,7 +4,7 @@ services:
   # No db server since uses MySQLite database.
 
   see_stuff:
-    image: "kimlewcan/rails-see-stuff:latest"
+    image: "kimlewcan/rails-see-stuff:1.0.0"
     restart: always
     ports:
       # Example with a database: Port forwarding on Mac:Port on db container
