@@ -56,8 +56,8 @@ echo
 
 echo "RUNNING rails commands and starting the app..."
 # Create the new db, load the schema, & seed the db.
-# rake db:drop
-# rake db:create
+rails db:drop
+rails db:create
 rails db:migrate RAILS_ENV=development
 rails db:seed
 echo
