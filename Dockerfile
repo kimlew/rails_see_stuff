@@ -30,7 +30,7 @@ RUN bundle install
 #CMD ["/bin/sh"]
 
 RUN echo "RUN app LOCALLY to test if configuration is correct."
-CMD ["rails", "server", "-b", "0.0.0.0"]
+#CMD ["rails", "server", "-b", "0.0.0.0"]
 # Note: The rails server -b parameter - binds rails to all IPs & listens to
 # requests from outside the container. Binding the server to 0.0.0.0 lets you
 # view the app with your server's public IP address.
@@ -39,6 +39,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 # Start/Run the main process.
 # RUN chmod +x launch_app.sh
 # CMD [ "/bin/bash", "-c", "bash launch_app.sh" ]
+CMD [ "/bin/bash", "-f", "launch_app.sh" ]
 
 # With Docker & Docker Compose, see running app at: http://localhost:48017
 # Note: Runs in container on port 3000 but I forwarded port to 48017.
