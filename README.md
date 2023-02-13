@@ -26,17 +26,6 @@ The application is a view-only site. It does NOT use Rails scaffolding, i.e., do
 
 2. Change to project directory with: `cd rails_see_stuff`
 
-3. Run: `docker compose up --build`
+3. Run: `docker compose up`
    
 4. Go to the browser address: `<http://localhost:48017/>`
-
-
-## To locally run the app by running a shell script
-
-1. Run: `git clone git@github.com:kimlew/rails_see_stuff.git`
-
-2. Change to project directory with: `cd rails_see_stuff`
-
-3. Run: `bash init_and_run_app.sh`
-
-4. Go to the browser address: `<http://localhost:3000/>`
