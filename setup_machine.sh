@@ -107,6 +107,6 @@ echo "CHECK Docker Compose version installed: "
 docker compose version
 echo
 
-# At this point at the end of script, you are passed back to main.sh & onto
-# next command with docker compose up --build (which in turn, runs launch_app.sh 
-# & runs the See Stuff web app).
+# At this point at the end this script, you are passed back to main.sh & onto
+# next command with ssh & docker compose up (which in turn, runs launch_app.sh
+# from the Dockerfile, which runs the See Stuff web app).
